@@ -84,16 +84,16 @@ public class OSCManager : MonoBehaviour {
 
         if (dataList[0].Address != "/shogi/msgtype") return;
 
-        int msgtype = (int)dataList[0].Data[0];
+        int msgtype = int.Parse((string)dataList[0].Data[0]);
         if (msgtype == 0)
         {
             if (dataList[1].Address != "/shogi/playerid") return;
             if (dataList[2].Address != "/shogi/target") return;
             if (dataList[3].Address != "/shogi/direction") return;
 
-            int playerID = (int)dataList[1].Data[0];
-            int targetType = (int)dataList[2].Data[0];
-            int directionType = (int)dataList[3].Data[0];
+            int playerID = int.Parse((string)dataList[1].Data[0]);
+            int targetType = int.Parse((string)dataList[2].Data[0]);
+            int directionType = int.Parse((string)dataList[3].Data[0]);
 
             Debug.Log(string.Format("msgtype:{0}, playerID:{1}, target:{2}, direction{3}", msgtype, playerID, targetType, directionType));
 
@@ -109,9 +109,9 @@ public class OSCManager : MonoBehaviour {
             if (dataList[3].Address != "/shogi/posx") return;
             if (dataList[4].Address != "/shogi/posy") return;
 
-            int playerID = (int)dataList[1].Data[0];
-            int targetType = (int)dataList[2].Data[0];
-            Vector2Int pos = new Vector2Int((int)dataList[3].Data[0], (int)dataList[4].Data[0]);
+            int playerID = int.Parse((string)dataList[1].Data[0]);
+            int targetType = int.Parse((string)dataList[2].Data[0]);
+            Vector2Int pos = new Vector2Int(int.Parse((string)dataList[3].Data[0]), int.Parse((string)dataList[4].Data[0]));
 
             Debug.Log(string.Format("msgtype:{0}, playerID:{1}, target:{2}, pos:{3}", msgtype, playerID, targetType, pos));
 
