@@ -122,9 +122,13 @@ public class Manager : MonoBehaviour {
 
     public void OnMovementDisided(int playerID, string komaID, string movementID)
     {
-        Debug.Log("Player:" + playerID + " Koma:" + komaID + " Movement:" + movementID);
+        if ((playerID != 0) && (playerID != 1)) return;
+        if (!KomaLists[playerID].Any(pair => pair.Key == komaID)) return;
 
         var movementList = KomaLists[playerID][komaID].GetComponent<Koma>().CanMovePositions;
+        if (!movementList.Any(pair => pair.Key == movementID)) return;
+
+        Debug.Log("Player:" + playerID + " Koma:" + komaID + " Movement:" + movementID);
 
         Vector2Int newPos = movementList[movementID];
         KomaLists[playerID][komaID].GetComponent<Koma>().Pos = newPos;
@@ -185,6 +189,12 @@ public class Manager : MonoBehaviour {
 
     public void OnTegomaUchi(int playerID, string komaID, string posID)
     {
+        if ((playerID != 0) && (playerID != 1)) return;
+        if (!MochigomaLists[playerID].Any(pair => pair.Key == komaID)) return;
+        if (!UchiPosList.Any(pair => pair.Key == posID)) return;
+
+        Debug.Log("Player:" + playerID + " Koma:" + komaID + " posID:" + posID);
+
         Vector2Int newPos = UchiPosList[posID];
 
         var target = MochigomaLists[playerID][komaID];
