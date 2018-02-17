@@ -191,7 +191,9 @@ public class Manager : MonoBehaviour {
     {
         if ((playerID != 0) && (playerID != 1)) return;
         if (!MochigomaLists[playerID].Any(pair => pair.Key == komaID)) return;
-        if (!UchiPosList.Any(pair => pair.Key == posID)) return;
+
+        var canUchiPosList = GetCanUchiPositions(playerID);
+        if (!canUchiPosList.Any(key => key == posID)) return;
 
         Debug.Log("Player:" + playerID + " Koma:" + komaID + " posID:" + posID);
 
