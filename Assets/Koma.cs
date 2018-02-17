@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Koma : MonoBehaviour {
     public enum Kind
@@ -161,5 +162,11 @@ public class Koma : MonoBehaviour {
         transform.rotation = Quaternion.AngleAxis(dir == Direction.Up ? 0 : 180, new Vector3(0, 1, 0));
 	}
 
-    
+    public void SetMovement(string movementID)
+    {
+        var canMoveList = CanMovePositions;
+        if (!canMoveList.Any(pair => pair.Key == movementID)) return;
+
+        Pos = CanMovePositions[movementID];
+    }
 }

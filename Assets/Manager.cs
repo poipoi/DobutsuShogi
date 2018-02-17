@@ -125,17 +125,17 @@ public class Manager : MonoBehaviour {
         if ((playerID != 0) && (playerID != 1)) return;
         if (!KomaLists[playerID].Any(pair => pair.Key == komaID)) return;
 
-        var movementList = KomaLists[playerID][komaID].GetComponent<Koma>().CanMovePositions;
-        if (!movementList.Any(pair => pair.Key == movementID)) return;
+        var movementList = GetCanMovePositions(playerID, komaID);
+        if (!movementList.Any(key => key == movementID)) return;
 
         Debug.Log("Player:" + playerID + " Koma:" + komaID + " Movement:" + movementID);
 
-        Vector2Int newPos = movementList[movementID];
-        KomaLists[playerID][komaID].GetComponent<Koma>().Pos = newPos;
+        KomaLists[playerID][komaID].GetComponent<Koma>().SetMovement(movementID);
 
+        var pos = KomaLists[playerID][komaID].GetComponent<Koma>().Pos;
         if (KomaLists[playerID][komaID].GetComponent<Koma>().MyKind == Koma.Kind.Chick)
         {
-            if (((playerID == 0) && (newPos.y == 3)) || ((playerID == 1) && (newPos.y == 0)))
+            if (((playerID == 0) && (pos.y == 3)) || ((playerID == 1) && (pos.y == 0)))
             {
                 KomaLists[playerID][komaID].GetComponent<Koma>().MyKind = Koma.Kind.Chicken;
             }
@@ -144,7 +144,7 @@ public class Manager : MonoBehaviour {
         int enemyID = playerID == 0 ? 1 : 0;
         foreach (var pair in KomaLists[enemyID])
         {
-            if (pair.Value.GetComponent<Koma>().Pos == newPos)
+            if (pair.Value.GetComponent<Koma>().Pos == pos)
             {
                 MochigomaLists[playerID].Add(pair.Key, pair.Value);
                 pair.Value.transform.parent = MochigomaFields[playerID].transform;
