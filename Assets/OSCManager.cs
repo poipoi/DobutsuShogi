@@ -43,6 +43,10 @@ public class OSCManager : MonoBehaviour {
         { new Vector2Int(2, 0), "C-4"  },
     };
 
+    public void Finish()
+    {
+        myServer.Close();
+    }
 
     // Use this for initialization
     void Start() {

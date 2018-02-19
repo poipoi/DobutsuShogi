@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 
+
 public class Controller : MonoBehaviour {
 
     public GameObject manager;
@@ -23,6 +24,11 @@ public class Controller : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+
+//#if HONBAN
+        gameObject.active = false;
+//#endif
+
         DobutsuButtons.Add("とり01", transform.Find("DobutsuButtons/Tori01Button").gameObject);
         DobutsuButtons.Add("ぞう01", transform.Find("DobutsuButtons/Elephant01Button").gameObject);
         DobutsuButtons.Add("らいおん01", transform.Find("DobutsuButtons/Lion01Button").gameObject);

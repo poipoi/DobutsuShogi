@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour {
 
     public GameObject Field;
     public GameObject[] MochigomaFields = new GameObject[2];
     public GameObject Canvas;
+    public GameObject Osc;
 
     GameObject WinnerText;
 
@@ -53,8 +55,12 @@ public class Manager : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		
-	}
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Osc.GetComponent<OSCManager>().Finish();
+            SceneManager.LoadScene(0);
+        }
+    }
 
     public List<string> GetKomaList(int playerID)
     {
